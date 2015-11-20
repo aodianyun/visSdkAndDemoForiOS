@@ -11,6 +11,7 @@
 #import "VisSDK.h"
 
 #define RTMPDEMO @"rtmp://1028.lssplay.aodianyun.com/live_1433/1430725218"
+#define RTMPDEMOPublish @"rtmp://1011.lsspublish.aodianyun.com/demo/phonePublish"
 
 @interface ViewController ()
 @property (strong, nonatomic) VisSDK* visClient;
@@ -32,8 +33,8 @@
     //设置参数，这里请把...替换成具体的参数，uid填写正确地uid
     [_visClient setApp:@"..." andStream:@"..." andPassword:@"..." andUid:-1];
     //关联视图
-    _displayView.firstView = _visClient.preview;
-    _displayView.secondView = _visClient.playView;
+    _displayView.firstView = _visClient.preview;    //发布预览显示的视图
+    _displayView.secondView = _visClient.playView;  //播放显示的视图
     //开始发布预览
     [_visClient startPreviewWithCamera:NO];
 }
@@ -117,7 +118,31 @@
         [self alertMessage:@"stoped publish"];
     }];
 }
-#pragma mark -
+#pragma mark - 以下是一些辅助功能
+- (IBAction) denoiseBtnClick:(UIButton *)sender {
+    static BOOL denoise;
+    denoise = !denoise;
+    [_visClient setDenoiseEnable:denoise];
+    [self alertMessage:[NSString stringWithFormat:@"%d",(int)denoise]];
+}
+- (IBAction) micBtnClick:(UIButton *)sender {
+    static BOOL mic;
+    mic = !mic;
+    [_visClient setMicEnable:mic];
+    [self alertMessage:[NSString stringWithFormat:@"%d",(int)mic]];
+}
+- (IBAction) camBtnClick:(UIButton *)sender {
+    static BOOL cam;
+    cam = !cam;
+    [_visClient setCamEnable:cam];
+    [self alertMessage:[NSString stringWithFormat:@"%d",(int)cam]];
+}
+- (IBAction) flashBtnClick:(UIButton *)sender {
+    static BOOL flash;
+    flash = !flash;
+    [_visClient setFlashEnable:flash];
+    [self alertMessage:[NSString stringWithFormat:@"%d",(int)flash]];
+}
 - (void) alertMessage:(NSString *) msg
 {
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:

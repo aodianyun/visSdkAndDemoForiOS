@@ -1,0 +1,100 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title></title>
+<style id="system" type="text/css">h1,h2,h3,h4,h5,h6,p,blockquote {    margin: 0;    padding: 0;}body {    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;    font-size: 13px;    line-height: 18px;    color: #737373;    margin: 10px 13px 10px 13px;}a {    color: #0069d6;}a:hover {    color: #0050a3;    text-decoration: none;}a img {    border: none;}p {    margin-bottom: 9px;}h1,h2,h3,h4,h5,h6 {    color: #404040;    line-height: 36px;}h1 {    margin-bottom: 18px;    font-size: 30px;}h2 {    font-size: 24px;}h3 {    font-size: 18px;}h4 {    font-size: 16px;}h5 {    font-size: 14px;}h6 {    font-size: 13px;}hr {    margin: 0 0 19px;    border: 0;    border-bottom: 1px solid #ccc;}blockquote {    padding: 13px 13px 21px 15px;    margin-bottom: 18px;    font-family:georgia,serif;    font-style: italic;}blockquote:before {    content:"C";    font-size:40px;    margin-left:-10px;    font-family:georgia,serif;    color:#eee;}blockquote p {    font-size: 14px;    font-weight: 300;    line-height: 18px;    margin-bottom: 0;    font-style: italic;}code, pre {    font-family: Monaco, Andale Mono, Courier New, monospace;}code {    background-color: #fee9cc;    color: rgba(0, 0, 0, 0.75);    padding: 1px 3px;    font-size: 12px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    border-radius: 3px;}pre {    display: block;    padding: 14px;    margin: 0 0 18px;    line-height: 16px;    font-size: 11px;    border: 1px solid #d9d9d9;    white-space: pre-wrap;    word-wrap: break-word;}pre code {    background-color: #fff;    color:#737373;    font-size: 11px;    padding: 0;}@media screen and (min-width: 768px) {    body {        width: 748px;        margin:10px auto;    }}</style><style id="custom" type="text/css"></style></head>
+<body marginheight="0"><h1>VisSDK API For Objective-C 文档</h1>
+<h3>当前SDK版本1.1</h3>
+<h1>创建对象</h1>
+<pre><code>@property (strong, nonatomic) VisSDK* visClient;
+@property (weak, nonatomic) IBOutlet UIView *preview;
+@property (weak, nonatomic) IBOutlet UIView *playView;
+...
+- (void) viewDidLoad {
+    ...
+    _visClient = [[VisSDK alloc] init];
+}</code></pre>
+<h1>设置</h1>
+<pre><code>//设置参数
+[_visClient setApp:@"..." andStream:@"..." andPassword:@"..." andUid:...];
+//关联视图
+_visClient.preview.frame = _preview.bounds;
+_visClient.playView.frame = _playView.bounds;
+[_preview addSubview:_visClient.preview];   //发布预览视图
+[_playView addSubview:_visClient.playView]; //播放视图</code></pre>
+<h1>获取上麦情况</h1>
+<pre><code>[_visClient fetchMicState:^(int state) {
+    //state的第0位代表第一个麦有是否上麦，第1位代表第二个麦是否上麦
+    NSLog(@"%@",[NSString stringWithFormat:@"第1个麦:%d,第2个麦:%d",state&amp;1,(state&gt;&gt;1)&amp;1]);
+} onError:^(int errCode, NSString *message) {
+    if (errCode == kConnectionError) {
+        //连接错误
+        NSLog(@"%@",message);
+    } else if(errCode == kPasswordError) {
+        //密码错误
+        NSLog(@"%@",message);
+    } else {
+        //请求错误 kRequestError
+        NSLog(@"%@",message);
+    }
+}];</code></pre>
+<h1>开始播放合成画面</h1>
+<pre><code>//播放合成画面
+[_visClient startPlay];</code></pre>
+<h1>停止播放合成画面</h1>
+<pre><code>//停止播放合成画面
+[_visClient stopPlay];</code></pre>
+<h1>开启预览</h1>
+<pre><code>//发布直播前需要先开启预览，参数表示是否使用前置摄像头
+[_visClient startPreviewWithCamera:NO];</code></pre>
+<h1>停止预览</h1>
+<pre><code>[_visClient stopPreview];</code></pre>
+<h1>开始发布和播放</h1>
+<pre><code>//发布直播，并播放另一端的画面
+[_visClient startPlayAndPubOnSuccess:^{
+    NSLog(@"publish success");
+} onError:^(int errCode, NSString *message) {
+    if (errCode == kConnectionError) {
+        //http连接错误
+        NSLog(@"%@",message);
+    } else if (errCode == kPasswordError) {
+        //密码错误
+        NSLog(@"%@",message);
+    } else if(errCode == kPublishConflict) {
+        //发布冲突
+        NSLog(@"%@",message);
+    } else if (errCode == kRequestError) {
+        //错误的内部http请求
+        NSLog(@"%@",message);
+    } else {
+        //发布失败 kPublishFailed
+        NSLog(@"%@",message);
+    }
+} withFlag:0];</code></pre>
+<h1>停止发布和播放</h1>
+<pre><code>//停止直播和播放
+[_visClient stopPlayAndPubOnSuccess:^{
+    NSLog(@"stoped publish");
+}];</code></pre>
+<h1>切换摄像头</h1>
+<pre><code>//切换前后摄像头
+[_visClient switchCamera];</code></pre>
+<h1>麦克风打开和关闭</h1>
+<pre><code>//参数micEnable为true表示打开麦克风，false表示关闭。默认打开
+[_visClient setMicEnable:micEnable];</code></pre>
+<h1>摄像头打开和关闭</h1>
+<pre><code>//参数camEnable为true表示打开摄像头，false表示关闭。默认打开。
+//该函数不影响预览，只影响发布输出
+[_visClient setCamEnable:camEnable];</code></pre>
+<h1>闪关灯开关</h1>
+<pre><code>[_visClient setFlashEnable:flashEnable];</code></pre>
+<h1>消除背景音效</h1>
+<pre><code>//开启背景噪音消除，软件消除算法，有一定CPU消耗
+[_visClient setDenoiseEnable:denoise];</code></pre>
+<h1>释放资源</h1>
+<pre><code>- (void) viewDidDisappear:(BOOL)animated {
+    ...
+    //会停止播放和发布、关闭预览
+    [_visClient shutdown];
+}</code></pre>
+<p>Edit By <a href="http://mahua.jser.me">MaHua</a></p>
+</body></html>

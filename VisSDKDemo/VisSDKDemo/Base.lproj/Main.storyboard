@@ -147,6 +147,62 @@
                                     <action selector="getMicState:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j0X-dJ-T0O"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJB-Fp-Vxe">
+                                <rect key="frame" x="16" y="226" width="120" height="29"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="JHb-Yg-eW6"/>
+                                    <constraint firstAttribute="height" constant="29" id="zST-am-xm3"/>
+                                </constraints>
+                                <state key="normal" title="消除背景噪音">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="denoiseBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ty-cO-3Oc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCX-iB-71O">
+                                <rect key="frame" x="229" y="226" width="130" height="29"/>
+                                <color key="backgroundColor" red="0.66274511814117432" green="0.73725491762161255" blue="0.13333334028720856" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="eOH-fI-u3M"/>
+                                    <constraint firstAttribute="width" constant="130" id="nAC-Sf-SH2"/>
+                                </constraints>
+                                <state key="normal" title="麦克风开关">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="micBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rde-ER-jMv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfo-w1-bj0">
+                                <rect key="frame" x="16" y="273" width="120" height="29"/>
+                                <color key="backgroundColor" red="0.91764712333679199" green="0.41176474094390869" blue="0.16078431904315948" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="JXi-EG-QVE"/>
+                                    <constraint firstAttribute="width" constant="120" id="nKT-tx-2dc"/>
+                                </constraints>
+                                <state key="normal" title="摄像头开关">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="camBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nIX-ZX-fVX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyr-eg-cC6">
+                                <rect key="frame" x="229" y="273" width="130" height="29"/>
+                                <color key="backgroundColor" red="0.30196079611778259" green="0.92549026012420654" blue="0.87058830261230469" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="aL2-Gj-6EY"/>
+                                    <constraint firstAttribute="height" constant="29" id="iTK-D4-OLM"/>
+                                </constraints>
+                                <state key="normal" title="闪光灯开关">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="flashBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lui-zM-TWc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -155,17 +211,25 @@
                             <constraint firstItem="OWT-Xj-lKT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7BB-kD-NO2"/>
                             <constraint firstItem="VzV-YX-qQz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7e2-Eu-NAn"/>
                             <constraint firstItem="Pm1-td-PHq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="C5X-lN-Pny"/>
+                            <constraint firstItem="uyr-eg-cC6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="HVI-Ow-gmU"/>
                             <constraint firstItem="VzV-YX-qQz" firstAttribute="top" secondItem="YUG-EQ-v4H" secondAttribute="bottom" constant="21" id="Hwk-H0-Zz4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Pm1-td-PHq" secondAttribute="trailing" constant="-16" id="NBb-ys-URs"/>
                             <constraint firstItem="YUG-EQ-v4H" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="RS9-Hi-5pg"/>
                             <constraint firstItem="Pm1-td-PHq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="Rfy-2X-2P5"/>
+                            <constraint firstItem="Tfo-w1-bj0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="WHb-re-r2D"/>
                             <constraint firstItem="oXH-dJ-Y5e" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="WJb-At-IoP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Pm1-td-PHq" secondAttribute="bottom" id="ZBx-vI-o58"/>
                             <constraint firstItem="Uaa-te-bvl" firstAttribute="top" secondItem="oXH-dJ-Y5e" secondAttribute="bottom" constant="22" id="aYA-aU-fWv"/>
+                            <constraint firstItem="uCX-iB-71O" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="aqS-JV-HIJ"/>
                             <constraint firstItem="YUG-EQ-v4H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fP4-Va-reR"/>
+                            <constraint firstItem="tJB-Fp-Vxe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fjE-RU-DRb"/>
+                            <constraint firstItem="uCX-iB-71O" firstAttribute="top" secondItem="XfC-c3-W8l" secondAttribute="bottom" constant="18" id="kSB-u7-cId"/>
                             <constraint firstItem="XfC-c3-W8l" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="leH-zB-RDi"/>
+                            <constraint firstItem="Tfo-w1-bj0" firstAttribute="top" secondItem="tJB-Fp-Vxe" secondAttribute="bottom" constant="18" id="nae-34-qSa"/>
                             <constraint firstItem="Uaa-te-bvl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="naf-LG-c8E"/>
+                            <constraint firstItem="uyr-eg-cC6" firstAttribute="top" secondItem="uCX-iB-71O" secondAttribute="bottom" constant="18" id="pA2-ri-yCK"/>
                             <constraint firstItem="oXH-dJ-Y5e" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="q3A-En-phM"/>
+                            <constraint firstItem="tJB-Fp-Vxe" firstAttribute="top" secondItem="OWT-Xj-lKT" secondAttribute="bottom" constant="18" id="s5a-DR-sUk"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

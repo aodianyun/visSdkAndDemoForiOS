@@ -4,7 +4,7 @@
 //
 //  Created by Mac on 15/10/26.
 //  Copyright (c) 2015年 Mac. All rights reserved.
-//  当前SDK版本是 1.0
+//  当前SDK版本是 1.1
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -54,7 +54,16 @@ typedef void (^VisErrorCallback)(int errCode,NSString* message);
 - (void) stopPlay;
 
 //切换摄像头
-- (void) switchCamera;
+- (int) switchCamera;
+//开启背景噪音消除，软件消除算法，有一定CPU消耗
+- (int) setDenoiseEnable:(BOOL)denoise;
+//打开/关闭麦克风
+- (int) setMicEnable:(BOOL)micEnable;
+//打开/关闭摄像头
+- (int) setCamEnable:(BOOL)camEnable;
+//打开/关闭闪关灯
+- (int) setFlashEnable:(BOOL)flashEnable;
+
 //获取当前上麦情况。state的第0位代表第一个麦，0表示没有上麦，1表示有人上麦。同理，state的第1位表示第二个麦的情况。
 - (void) fetchMicState:(void (^)(int state)) success onError:(VisErrorCallback) callback;
 
