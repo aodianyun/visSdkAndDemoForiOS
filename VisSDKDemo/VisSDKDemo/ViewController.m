@@ -7,146 +7,36 @@
 //
 
 #import "ViewController.h"
-#import "BigSmallView.h"
-#import "VisSDK.h"
+#import "PublishViewController.h"
+#import "PlayViewController.h"
 
-#define RTMPDEMO @"rtmp://1028.lssplay.aodianyun.com/live_1433/1430725218"
-#define RTMPDEMOPublish @"rtmp://1011.lsspublish.aodianyun.com/demo/phonePublish"
-
-@interface ViewController ()
-@property (strong, nonatomic) VisSDK* visClient;
-@property (weak, nonatomic) IBOutlet BigSmallView* displayView;
-@property (weak, nonatomic) IBOutlet UIButton *stopMixPlayBtn;
-@property (weak, nonatomic) IBOutlet UIButton *stopPlayAndPubBtn;
+@interface ViewController () <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *appTxt;
+@property (weak, nonatomic) IBOutlet UITextField *streamTxt;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTxt;
+@property (weak, nonatomic) IBOutlet UITextField *uidTxt;
 @end
 
 @implementation ViewController
-- (void) dealloc
+- (IBAction)startPublishBtnClick:(UIButton *)sender {
+    PublishViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"PublishViewController"];
+    ctrl.app = _appTxt.text;
+    ctrl.stream = _streamTxt.text;
+    ctrl.password = _passwordTxt.text;
+    ctrl.uid = [_uidTxt.text intValue];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
+- (IBAction)startPlayBtnClick:(UIButton *)sender {
+    PlayViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
+    ctrl.app = _appTxt.text;
+    ctrl.stream = _streamTxt.text;
+    ctrl.password = _passwordTxt.text;
+    ctrl.uid = [_uidTxt.text intValue];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"ViewController.dealloc: %p",self);
-}
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-    //创建对象
-    _visClient = [[VisSDK alloc] init];
-    //设置参数，这里请把...替换成具体的参数，uid填写正确地uid
-    [_visClient setApp:@"..." andStream:@"..." andPassword:@"..." andUid:-1];
-    //关联视图
-    _displayView.firstView = _visClient.preview;    //发布预览显示的视图
-    _displayView.secondView = _visClient.playView;  //播放显示的视图
-    //开始发布预览
-    [_visClient startPreviewWithCamera:NO];
-}
-- (void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    //释放资源
-    [_visClient shutdown];
-}
-#pragma mark -
-- (IBAction) changeBtnClick:(UIButton *)sender
-{
-    //切换大小视图
-    [_displayView switchMajorView];
-}
-- (IBAction) getMicState:(UIButton *)sender {
-    //获取上麦情况
-    [_visClient fetchMicState:^(int state) {
-        NSString* str = [NSString stringWithFormat:@"第1个麦:%d,第2个麦:%d",state&1,(state>>1)&1];
-        [self alertMessage:str];
-    } onError:^(int errCode, NSString *message) {
-        if (errCode == kConnectionError) {
-            //连接错误
-            [self alertMessage:message];
-        } else if(errCode == kPasswordError) {
-            //密码错误
-            [self alertMessage:message];
-        } else {
-            //请求错误 kRequestError
-            [self alertMessage:message];
-        }
-    }];
-}
-#pragma mark - 播放合成画面
-- (IBAction) playMixBtnClick:(UIButton *)sender
-{
-    //播放合成画面
-    [_visClient startPlay];
-    [_displayView setSecondViewMajor];
-    _stopMixPlayBtn.userInteractionEnabled = YES;
-    _stopPlayAndPubBtn.userInteractionEnabled = NO;
-}
-- (IBAction) stopPlayMixBtnClick:(UIButton *)sender
-{
-    //停止播放合成画面
-    [_visClient stopPlay];
-}
-#pragma mark - 同时播放、发布
-- (IBAction) playAndPublishBtnClick:(UIButton *)sender
-{
-    //发布直播，并播放另一个画面
-    [_visClient startPlayAndPubOnSuccess:^{
-        [self alertMessage:@"publish success"];
-        //设置预览画面为大视图
-        [_displayView setFirstViewMajor];
-    } onError:^(int errCode, NSString *message) {
-        if (errCode == kConnectionError) {
-            //http连接错误
-            [self alertMessage:message];
-        } else if (errCode == kPasswordError) {
-            //密码错误
-            [self alertMessage:message];
-        } else if(errCode == kPublishConflict) {
-            //发布冲突
-            [self alertMessage:message];
-        } else if (errCode == kRequestError) {
-            //错误的内部http请求
-            [self alertMessage:message];
-        } else {
-            //发布失败 kPublishFailed
-            [self alertMessage:message];
-        }
-    } withFlag:0];
-    _stopMixPlayBtn.userInteractionEnabled = NO;
-    _stopPlayAndPubBtn.userInteractionEnabled = YES;
-}
-- (IBAction) stopPlayAndPubBtnClick:(UIButton *)sender
-{
-    //停止直播和播放
-    [_visClient stopPlayAndPubOnSuccess:^{
-        [self alertMessage:@"stoped publish"];
-    }];
-}
-#pragma mark - 以下是一些辅助功能
-- (IBAction) denoiseBtnClick:(UIButton *)sender {
-    static BOOL denoise;
-    denoise = !denoise;
-    [_visClient setDenoiseEnable:denoise];
-    [self alertMessage:[NSString stringWithFormat:@"%d",(int)denoise]];
-}
-- (IBAction) micBtnClick:(UIButton *)sender {
-    static BOOL mic;
-    mic = !mic;
-    [_visClient setMicEnable:mic];
-    [self alertMessage:[NSString stringWithFormat:@"%d",(int)mic]];
-}
-- (IBAction) camBtnClick:(UIButton *)sender {
-    static BOOL cam;
-    cam = !cam;
-    [_visClient setCamEnable:cam];
-    [self alertMessage:[NSString stringWithFormat:@"%d",(int)cam]];
-}
-- (IBAction) flashBtnClick:(UIButton *)sender {
-    static BOOL flash;
-    flash = !flash;
-    [_visClient setFlashEnable:flash];
-    [self alertMessage:[NSString stringWithFormat:@"%d",(int)flash]];
-}
-- (void) alertMessage:(NSString *) msg
-{
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:
-                              nil message:msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-    [alertView show];
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

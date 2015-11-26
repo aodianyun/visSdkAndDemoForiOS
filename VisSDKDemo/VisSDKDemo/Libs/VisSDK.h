@@ -4,7 +4,7 @@
 //
 //  Created by Mac on 15/10/26.
 //  Copyright (c) 2015年 Mac. All rights reserved.
-//  当前SDK版本是 1.1
+//  当前SDK版本是 1.2
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -32,6 +32,7 @@ typedef void (^VisErrorCallback)(int errCode,NSString* message);
 @property (nonatomic, strong, readonly) UIView* playView;
 @property (nonatomic, strong, readonly) UIView* preview;
 @property (nonatomic, assign) UIViewContentMode contentMode;
+@property (nonatomic, assign) int bufferTime;
 //获取当前状态的一些属性
 @property (nonatomic, assign, readonly) BOOL isPreviewing;   //是否正在预览
 @property (nonatomic, assign, readonly) BOOL isPlaying;     //是否正在播放
@@ -49,7 +50,7 @@ typedef void (^VisErrorCallback)(int errCode,NSString* message);
 //同时关闭发布和播放，但不关闭预览。关闭完成后会回调success
 - (void) stopPlayAndPubOnSuccess:(VisSuccessCallback) success;
 
-//仅仅启动播放,播放合成画面
+//仅仅启动播放,播放VIS合成画面
 - (void) startPlay;
 - (void) stopPlay;
 

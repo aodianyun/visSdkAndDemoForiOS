@@ -39,9 +39,10 @@
 {
     _smallViewWrap = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 158)];
     _smallViewWrap.backgroundColor = [UIColor whiteColor];
+    /*
     CALayer *lay  = _smallViewWrap.layer;
     [lay setMasksToBounds:YES];
-    [lay setCornerRadius:5];
+    [lay setCornerRadius:5];*/
     [self addSubview:_smallViewWrap];
     _isFirstMajor = YES;
     self.hideSmallView = NO;
@@ -51,7 +52,7 @@
     [super layoutSubviews];
     CGRect frame = _smallViewWrap.frame;
     frame.origin.x = self.frame.size.width - frame.size.width - 8;
-    frame.origin.y = self.frame.size.height - frame.size.height - 10;
+    frame.origin.y = self.frame.size.height - frame.size.height - 60;
     _smallViewWrap.frame = frame;
     [self refleshViewSize];
 }

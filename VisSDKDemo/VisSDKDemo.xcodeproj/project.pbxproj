@@ -19,6 +19,8 @@
 		044F7B791BDDEDB3008FBEC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044F7B781BDDEDB3008FBEC2 /* AudioToolbox.framework */; };
 		044F7B8E1BDE29AE008FBEC2 /* BigSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044F7B8D1BDE29AE008FBEC2 /* BigSmallView.m */; };
 		0472592D1BDF10D000D2C888 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472592C1BDF10D000D2C888 /* NavigationController.m */; };
+		04E1C0421C045E86009C211A /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1C0411C045E86009C211A /* PublishViewController.m */; };
+		04E1C0451C045EDB009C211A /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1C0441C045EDB009C211A /* PlayViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,10 @@
 		044F7B8D1BDE29AE008FBEC2 /* BigSmallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigSmallView.m; sourceTree = "<group>"; };
 		0472592B1BDF10D000D2C888 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		0472592C1BDF10D000D2C888 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		04E1C0401C045E86009C211A /* PublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishViewController.h; sourceTree = "<group>"; };
+		04E1C0411C045E86009C211A /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
+		04E1C0431C045EDB009C211A /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
+		04E1C0441C045EDB009C211A /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,10 @@
 				0472592C1BDF10D000D2C888 /* NavigationController.m */,
 				044F7B4F1BDDD1AE008FBEC2 /* ViewController.h */,
 				044F7B501BDDD1AE008FBEC2 /* ViewController.m */,
+				04E1C0401C045E86009C211A /* PublishViewController.h */,
+				04E1C0411C045E86009C211A /* PublishViewController.m */,
+				04E1C0431C045EDB009C211A /* PlayViewController.h */,
+				04E1C0441C045EDB009C211A /* PlayViewController.m */,
 				044F7B4C1BDDD1AE008FBEC2 /* AppDelegate.h */,
 				044F7B4D1BDDD1AE008FBEC2 /* AppDelegate.m */,
 				044F7B481BDDD1AE008FBEC2 /* Supporting Files */,
@@ -187,9 +197,11 @@
 			files = (
 				044F7B511BDDD1AE008FBEC2 /* ViewController.m in Sources */,
 				044F7B4E1BDDD1AE008FBEC2 /* AppDelegate.m in Sources */,
+				04E1C0421C045E86009C211A /* PublishViewController.m in Sources */,
 				044F7B4B1BDDD1AE008FBEC2 /* main.m in Sources */,
 				0472592D1BDF10D000D2C888 /* NavigationController.m in Sources */,
 				044F7B8E1BDE29AE008FBEC2 /* BigSmallView.m in Sources */,
+				04E1C0451C045EDB009C211A /* PlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,10 +312,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/VisSDKDemo/Libs/NodeMediaClient",
 					"$(PROJECT_DIR)/VisSDKDemo/Libs",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -318,10 +330,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/VisSDKDemo/Libs/NodeMediaClient",
 					"$(PROJECT_DIR)/VisSDKDemo/Libs",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
