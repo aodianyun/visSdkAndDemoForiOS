@@ -4,7 +4,7 @@
 //
 //  Created by Mac on 15/10/26.
 //  Copyright (c) 2015年 Mac. All rights reserved.
-//  当前SDK版本是 1.2.1
+//  当前SDK版本是 1.2.2
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -16,6 +16,9 @@
 #define kInvalidOperation  -104
 #define kPublishFailed     2002
 
+@class LivePlayer;
+@class LivePublisher;
+
 typedef void (^VisSuccessCallback)(void);
 typedef void (^VisErrorCallback)(int errCode,NSString* message);
 
@@ -25,6 +28,8 @@ typedef void (^VisErrorCallback)(int errCode,NSString* message);
 - (void) onPublishingError:(NSString*) msg;
 //未知的事件
 - (void) onUnknownEvent:(int) event message:(NSString*) msg;
+// vis 消息回调，包括play和publish
+- (void) onEventCallback:(int)event msg:(NSString*)msg;
 @end
 
 @interface VisSDK : NSObject
@@ -33,6 +38,8 @@ typedef void (^VisErrorCallback)(int errCode,NSString* message);
 @property (nonatomic, strong, readonly) UIView* preview;
 @property (nonatomic, assign) UIViewContentMode contentMode;
 @property (nonatomic, assign) int bufferTime;
+@property (nonatomic, strong) LivePublisher *publisher;
+@property (nonatomic, strong) LivePlayer *player;
 //获取当前状态的一些属性
 @property (nonatomic, assign, readonly) BOOL isPreviewing;   //是否正在预览
 @property (nonatomic, assign, readonly) BOOL isPlaying;     //是否正在播放
@@ -64,6 +71,8 @@ typedef void (^VisErrorCallback)(int errCode,NSString* message);
 - (int) setCamEnable:(BOOL)camEnable;
 //打开/关闭闪关灯
 - (int) setFlashEnable:(BOOL)flashEnable;
+// 可选 提前解析vis play的ip地址 错误kConnectionError
+- (void) flushIpForPlayOnsuccess:(VisSuccessCallback) success onError:(VisErrorCallback) fail;
 
 //获取当前上麦情况。state的第0位代表第一个麦，0表示没有上麦，1表示有人上麦。同理，state的第1位表示第二个麦的情况。
 - (void) fetchMicState:(void (^)(int state)) success onError:(VisErrorCallback) callback;

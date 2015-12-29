@@ -9,7 +9,7 @@
 #import "PlayViewController.h"
 #import "VisSDK.h"
 
-@interface PlayViewController ()
+@interface PlayViewController ()<VisSDKDelegate>
 @property (strong, nonatomic) VisSDK* visClient;
 @property (weak, nonatomic) IBOutlet UIView *playView;
 @end
@@ -19,6 +19,7 @@
     [super viewDidLoad];
     //创建对象
     _visClient = [[VisSDK alloc] init];
+    _visClient.delegate = self;
     //设置参数
     [_visClient setApp:_app andStream:_stream andPassword:_password andUid:_uid];
     //开始播放
@@ -39,4 +40,11 @@
     //释放资源
     [_visClient shutdown];
 }
+
+- (void)onEventCallback:(int)event msg:(NSString *)msg
+{
+    msg = msg == nil ? @"null":msg;
+    NSLog(@"event:%d msg:%@",event,msg);
+}
+
 @end

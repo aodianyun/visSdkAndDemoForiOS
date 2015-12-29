@@ -111,6 +111,8 @@
     }
     [self alertMessage:[NSString stringWithFormat:@"%d",(int)_flashEnable]];
 }
+
+
 /*
 - (IBAction) getMicState:(UIButton *)sender {
     //获取上麦情况
