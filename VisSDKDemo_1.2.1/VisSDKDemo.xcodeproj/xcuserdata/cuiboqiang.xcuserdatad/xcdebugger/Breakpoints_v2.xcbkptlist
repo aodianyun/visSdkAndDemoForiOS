@@ -9,59 +9,43 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VisSDKDemo/PublishViewController.m"
-            timestampString = "473066430.069861"
+            filePath = "VisSDKDemo/PlayViewController.m"
+            timestampString = "473237568.287314"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-playAndPublishBtnClick:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VisSDKDemo/PublishViewController.m"
-            timestampString = "473066431.007407"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "-playAndPublishBtnClick:"
-            landmarkType = "5">
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "-startBtn:"
+            landmarkType = "4">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[PublishViewController playAndPublishBtnClick:]"
+                  symbolName = "-[PlayViewController logTextView]"
                   moduleName = "VisSDKDemo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cuiboqiang/Downloads/VisSDK_1.2.1/VisSDKDemo_1.2/VisSDKDemo/PublishViewController.m"
-                  timestampString = "473067115.739593"
+                  urlString = "file:///Users/cuiboqiang/Downloads/VisSDK_1.2.1/VisSDKDemo_1.2.1/VisSDKDemo/PlayViewController.m"
+                  timestampString = "473237568.302784"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "220">
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__48-[PublishViewController playAndPublishBtnClick:]_block_invoke"
+                  symbolName = "-[PlayViewController setLogTextView:]"
                   moduleName = "VisSDKDemo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cuiboqiang/Downloads/VisSDK_1.2.1/VisSDKDemo_1.2/VisSDKDemo/PublishViewController.m"
-                  timestampString = "473067115.739816"
+                  urlString = "file:///Users/cuiboqiang/Downloads/VisSDK_1.2.1/VisSDKDemo_1.2.1/VisSDKDemo/PlayViewController.m"
+                  timestampString = "473237568.303051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>

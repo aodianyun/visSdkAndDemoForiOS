@@ -21,6 +21,7 @@
 		0472592D1BDF10D000D2C888 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472592C1BDF10D000D2C888 /* NavigationController.m */; };
 		04E1C0421C045E86009C211A /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1C0411C045E86009C211A /* PublishViewController.m */; };
 		04E1C0451C045EDB009C211A /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1C0441C045EDB009C211A /* PlayViewController.m */; };
+		2F08D8851C33E18400304EDF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F08D8841C33E18400304EDF /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		04E1C0411C045E86009C211A /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
 		04E1C0431C045EDB009C211A /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		04E1C0441C045EDB009C211A /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		2F08D8841C33E18400304EDF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		044F7B481BDDD1AE008FBEC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F08D8841C33E18400304EDF /* Default-568h@2x.png */,
 				044F7B551BDDD1AE008FBEC2 /* Images.xcassets */,
 				044F7B491BDDD1AE008FBEC2 /* Info.plist */,
 				044F7B4A1BDDD1AE008FBEC2 /* main.m */,
@@ -186,6 +189,7 @@
 			files = (
 				044F7B541BDDD1AE008FBEC2 /* Main.storyboard in Resources */,
 				044F7B561BDDD1AE008FBEC2 /* Images.xcassets in Resources */,
+				2F08D8851C33E18400304EDF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,7 @@
 @end
 
 @implementation ViewController
+
 - (IBAction)startPublishBtnClick:(UIButton *)sender {
     PublishViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"PublishViewController"];
     ctrl.app = _appTxt.text;

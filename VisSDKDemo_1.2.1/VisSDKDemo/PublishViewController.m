@@ -10,7 +10,7 @@
 #import "BigSmallView.h"
 #import "VisSDK.h"
 
-@interface PublishViewController ()
+@interface PublishViewController ()<VisSDKDelegate>
 @property (strong, nonatomic) VisSDK* visClient;
 @property (nonatomic,assign) BOOL micEnable;
 @property (nonatomic,assign) BOOL flashEnable;
@@ -19,13 +19,24 @@
 @property (weak, nonatomic) IBOutlet UIButton *flashBtn;
 @property (weak, nonatomic) IBOutlet UIButton *micBtn;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
+@property (weak, nonatomic) IBOutlet UITextView *logTextView;
 @end
 
 @implementation PublishViewController
+{
+    NSMutableString *_ms;
+    NSString *_msgString;
+    // 添加手势操作
+    UISwipeGestureRecognizer* recognizer;
+    BOOL _bShowLog;
+    NSMutableArray *array;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     //创建对象
     _visClient = [[VisSDK alloc] init];
+    [_visClient setDelegate:self];
     //设置参数
     [_visClient setApp:_app andStream:_stream andPassword:_password andUid:_uid];
     //关联视图
@@ -33,17 +44,49 @@
     _displayView.secondView = _visClient.playView;  //播放显示的视图
     //开始发布预览
     [_visClient startPreviewWithCamera:NO];
+    // 清空logTextView背景
+    [_logTextView setBackgroundColor: [UIColor clearColor]];
+    // 设置日志view不可编辑
+    self.logTextView.editable = false;
+    // 优化滚动闪
+    self.logTextView.layoutManager.allowsNonContiguousLayout = NO;
+    
+    [_logTextView setTextColor:[UIColor redColor]];
+    //[self.logTextView setAlpha:0.0];
+    // 拼接日志string的对象
+    _ms = [[NSMutableString alloc] init];
+    
+    // handleSwipeFrom 是偵測到手势，所要呼叫的方法
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    // 不同的 Recognizer 有不同的实体变数
+    // 例如 SwipeGesture 可以指定方向
+    // 而 TapGesture 則可以指定次數
+    recognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:recognizer];
+    
+    array = [NSMutableArray array];
 }
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     //释放资源
     [_visClient shutdown];
+    //删除手势
+    [self.view removeGestureRecognizer:recognizer];
 }
 #pragma mark - 同时播放、发布
 - (IBAction) playAndPublishBtnClick:(UIButton *)sender
 {
     if (_isBusy) return;
+    [_visClient flushIpForPlayOnsuccess:^{
+        [self startVis];
+    } onError:^(int errCode, NSString *message) {
+        [self startVis];
+    }];
+}
+
+- (void) startVis
+{
     if (!_visClient.isPublishing) {
         _isBusy= YES;
         //发布直播，并播放另一个画面
@@ -82,6 +125,7 @@
         }];
     }
 }
+
 #pragma mark - 以下是一些辅助功能
 - (IBAction) changeBtnClick:(UIButton *)sender
 {
@@ -112,6 +156,13 @@
     [self alertMessage:[NSString stringWithFormat:@"%d",(int)_flashEnable]];
 }
 
+- (void)onEventCallback:(int)event msg:(NSString *)msg
+{
+    if (_bShowLog) {
+        self.logTextView.text = [self limitLog:50 lastLog:msg];
+        [_logTextView scrollRangeToVisible:NSMakeRange(_logTextView.text.length, 1)];
+    }
+}
 
 /*
 - (IBAction) getMicState:(UIButton *)sender {
@@ -145,4 +196,32 @@
                               nil message:msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     [alertView show];
 }
+
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer*) trecognizer {
+    // 触发手勢事件后，在这里作些事情
+    if (_bShowLog) {
+        [UIView animateWithDuration:1.0 animations:^{
+            [self.logTextView setAlpha:0.0];
+        } completion:^(BOOL finished) {
+            _bShowLog = false;
+        }];
+    }else{
+        [UIView animateWithDuration:1.0 animations:^{
+            [self.logTextView setAlpha:1.0];
+        } completion:^(BOOL finished) {
+            _bShowLog = true;
+        }];
+    }
+}
+
+- (NSString *)limitLog:(int) logNum lastLog:(NSString *) log
+{
+    if ([array count] > logNum) {
+        [array removeObjectAtIndex:0];
+    }
+    [array addObject:log];
+    
+    return  [array componentsJoinedByString:@"\n"];
+}
+
 @end

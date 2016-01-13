@@ -4,7 +4,7 @@
 //
 //  Created by Mac on 15/10/26.
 //  Copyright (c) 2015年 Mac. All rights reserved.
-//  当前SDK版本是 1.2.2
+//  当前SDK版本是 1.2.3
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -14,6 +14,7 @@
 #define kPublishConflict   -102
 #define kPasswordError     -103
 #define kInvalidOperation  -104
+#define kVisLogEvent       -105
 #define kPublishFailed     2002
 
 @class LivePlayer;
